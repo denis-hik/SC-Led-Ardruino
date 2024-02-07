@@ -27,9 +27,14 @@ void build() {
 
     hub.Title(F("Mode"));
     hub.WidgetSize(100);
-    flag |= hub.Tabs(&data.mode, F("Pallette,Color,Radial"), F("Mode"));
+    flag |= hub.Tabs(&data.mode, F("Pallette,Color,Radial,Stop"), F("Mode"));
     
     if (data.mode == 0) {
+        hub.WidgetSize(50);
+        flag |= hub.Input(&data.pal_len, GH_UINT16, F("Length [leds]"));
+        flag |= hub.Select(&data.pal, FPSTR(paletteNames));
+    }
+    if (data.mode == 2) {
         hub.WidgetSize(50);
         flag |= hub.Input(&data.pal_len, GH_UINT16, F("Length [leds]"));
         flag |= hub.Select(&data.pal, FPSTR(paletteNames));
@@ -42,7 +47,10 @@ void build() {
     flag |= hub.Input(&data.ledm, GH_UINT8, F("leds/m"));
     //flag |= hub.Input(&data.max_spd, GH_UINT8, F("Max speed [kmh]"));
     hub.WidgetSize(100);
-    flag |= hub.Slider(&data.led_bri, GH_UINT8, F("Brightness"), 0, 255);
+    
+    if (data.mode != 3) {
+      flag |= hub.Slider(&data.led_bri, GH_UINT8, F("Brightness"), 0, 255);
+    }
     
     flag |= hub.Slider(&data.max_spd, GH_UINT8, F("Speed"), 0, 250);
 

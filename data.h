@@ -4,6 +4,7 @@
 
 #define TACHO_PIN 5
 #define LED_PIN 4
+#define LED_PIN1 2
 #define LED_CHIP WS2812
 #define LED_ORDER GRB
 #define VBAT_MAX 630
@@ -11,7 +12,7 @@
 #define LED_PRD 30
 
 struct Data {
-    uint16_t led_amount = 17;
+    uint16_t led_amount = 26;
     uint16_t diam = 68;
     uint16_t pal_len = 60;
     uint8_t led_bri = 255;
