@@ -26,15 +26,16 @@ void led_change() {
 void led_tick() {
     static GHtimer tmr(LED_PRD);
     if (tmr) {
+        static uint16_t pos = 0;
+        pos += data.max_spd * LED_PRD / 1000;  // (mm / s) * (ms / 1000) == mm
+        if (data.max_spd == 0) {
+            pos = 0;
+        }
+
+        uint16_t idx = pos * data.ledm / 1000;  // mm * (leds / m / 1000) == leds
+
         switch (data.mode) {
             case 0: {
-                static uint16_t pos = 0;
-                pos += data.max_spd * LED_PRD / 1000;  // (mm / s) * (ms / 1000) == mm
-                if (data.max_spd == 0) {
-                  pos = 0;
-                }
-                
-                uint16_t idx = pos * data.ledm / 1000;  // mm * (leds / m / 1000) == leds
 
                 for (uint16_t i = 0; i < data.led_amount; i++) {
                     leds[i] = ColorFromPalette(paletteArr[data.pal], 255 - (idx + i) * 255 / data.pal_len, 255, LINEARBLEND);
@@ -43,22 +44,8 @@ void led_tick() {
                 cled1->showLeds(data.led_bri);
             } break;
 
-            case 1: {
-                uint16_t spd = min(tacho_speed(), (uint16_t)(35 * 278));
-                cled->showColor(CHSV(map(data.max_spd, 0, 35 * 278, 120, 0), 255, 255), data.led_bri);
-                cled1->showColor(CHSV(map(data.max_spd, 0, 35 * 278, 120, 0), 255, 255), data.led_bri);
-            } break;
-
             
-            case 2: {
-               static uint16_t pos = 0;
-                pos += data.max_spd * LED_PRD / 1000;  // (mm / s) * (ms / 1000) == mm
-                if (data.max_spd == 0) {
-                  pos = 0;
-                }
-                
-                uint16_t idx = pos * data.ledm / 1000;  // mm * (leds / m / 1000) == leds
-
+            case 1: {
                 for (uint16_t i = 0; i < data.led_amount; i++) {
                     if (i > data.led_amount / 2) {
                       leds[data.led_amount - i - 1] = ColorFromPalette(paletteArr[data.pal], 255 - (idx + i) * 255 / data.pal_len, 255, LINEARBLEND);
@@ -70,13 +57,12 @@ void led_tick() {
                 cled1->showLeds(data.led_bri);
             }break;
             
-            case 3: {
-                uint16_t spd = min(tacho_speed(), (uint16_t)(35 * 278));
+            case 2: {
                 cled->showColor(CHSV(255, 0, 0), data.led_bri);
                 cled1->showColor(CHSV(255, 0, 0), data.led_bri);
             } break;
 
-            case4: {
+            case 3: {
               if (data.max_spd == 0) {
                 for (uint16_t i = 0; i < data.led_amount; i++) {
                   static uint16_t pos = 0;

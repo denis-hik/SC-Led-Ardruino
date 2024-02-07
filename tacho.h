@@ -21,16 +21,6 @@ void tacho_init() {
     pinMode(TACHO_PIN, INPUT_PULLUP);
 }
 
-uint16_t tacho_speed() {
-    return _speed_f;
-}
-uint16_t tacho_kmh() {
-    return _speed_f / 278;
-}
-uint32_t tacho_pulse() {
-    return _pulse;
-}
-
 void tacho_tick() {
     if (_tprd) {
         _speed = (data.diam * 3141592ul) / _tprd;   // (2*Pi*D / (prd / 1000000))

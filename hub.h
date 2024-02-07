@@ -22,12 +22,12 @@ void build() {
     hub.Title(F("Status"));
     hub.BeginWidgets();
     hub.WidgetSize(50);
-    hub.Gauge_(F("spd"), tacho_kmh(), F("kmh"), F("Speed"), 0, 35);
+    hub.Gauge_(F("spd"), data.max_spd / (35 - data.max_spd), F("kmh"), F("Speed"), 0, 35);
     hub.Gauge(getBat(), F("%"), F("Battery"));
 
     hub.Title(F("Mode"));
     hub.WidgetSize(100);
-    flag |= hub.Tabs(&data.mode, F("Pallette,Color,Radial,Stop"), F("Mode"));
+    flag |= hub.Tabs(&data.mode, F("Palette,Radial"), F("Mode"));
     
     if (data.mode == 0) {
         hub.WidgetSize(50);
@@ -71,6 +71,6 @@ void hub_tick() {
 
     static GHtimer upd(1000);
     if (upd) {
-        hub.sendUpdate(F("spd"), String(tacho_kmh()));
+//        hub.sendUpdate(F("spd"), String(tacho_kmh()));
     }
 }
