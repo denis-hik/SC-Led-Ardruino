@@ -1,6 +1,6 @@
 # SC-Led-Ardruino
 
-for [GyverHub](https://github.com/GyverLibs/GyverHub/) and app [SC-android](https://play.google.com/store/apps/details?id=sc.denishik.ru)
+for [GyverHub](https://github.com/GyverLibs/GyverHub/) and app [SC-android](https://github.com/denis-hik/SC-Android)
 
 install> `Adruino IDE`\
 add plate> `http://arduino.esp8266.com/stable/package_esp8266com_index.jsonhttps://dl.espressif.com/dl/package_esp32_index.json`\
