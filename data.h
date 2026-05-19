@@ -20,6 +20,7 @@ struct Data {
     uint8_t mode = 0;
     uint8_t max_spd = 0;
     uint8_t pal = 0;
+    bool isPolice = false;
 };
 
 Data data;

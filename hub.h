@@ -27,7 +27,7 @@ void build() {
 
     hub.Title(F("Mode"));
     hub.WidgetSize(100);
-    flag |= hub.Tabs(&data.mode, F("Palette,Radial"), F("Mode"));
+    flag |= hub.Tabs(&data.mode, F("Palette,Radial,Color,Auto"), F("Mode"));
     
     if (data.mode == 0) {
         hub.WidgetSize(50);
@@ -50,6 +50,12 @@ void build() {
     
     if (data.mode != 3) {
       flag |= hub.Slider(&data.led_bri, GH_UINT8, F("Brightness"), 0, 255);
+    } else {
+      hub.BeginWidgets();
+      hub.WidgetSize(50);
+      flag |= hub.Select(&data.pal, FPSTR(paletteNames));
+      flag |= hub.SwitchIcon(&data.isPolice, F("My switch i"), F(""), GH_BLUE);
+      hub.WidgetSize(100);
     }
     
     flag |= hub.Slider(&data.max_spd, GH_UINT8, F("Speed"), 0, 250);

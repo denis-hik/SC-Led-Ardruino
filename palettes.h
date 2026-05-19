@@ -285,10 +285,16 @@ DEFINE_GRADIENT_PALETTE(aurora_gp){
 
 DEFINE_GRADIENT_PALETTE(stop_gp){
     0, 255,146,3,
-    40, 0, 0, 0,
+    20, 0, 0, 0,
     80, 0, 0, 0,
+    100, 0, 0, 0,
+    109, 0, 0, 0,
     129, 255,146,3,
-    255, 0, 0, 0, 0
+    255, 0, 0, 0
+};
+DEFINE_GRADIENT_PALETTE(black){
+    0, 0,0,0,
+    255, 0, 0, 0
 };
 
 const TProgmemRGBPalette16 WoodFireColors_p PROGMEM = {CRGB::Black, 0x330e00, 0x661c00, 0x992900, 0xcc3700, CRGB::OrangeRed, 0xff5800, 0xff6b00, 0xff7f00, 0xff9200, CRGB::Orange, 0xffaf00, 0xffb900, 0xffc300, 0xffcd00, CRGB::Gold};             //* рыжий
@@ -330,7 +336,8 @@ CRGBPalette16 paletteArr[] = {
     gummy_gp,
     leo_gp,
     aurora_gp,
-    stop_gp
+    stop_gp,
+    black,
 };
 
 static const char paletteNames[] PROGMEM =
@@ -364,6 +371,5 @@ static const char paletteNames[] PROGMEM =
     "blueSmoke_gp,"
     "gummy_gp,"
     "leo_gp,"
-    "aurora_gp,"
-    "stop_gp"
+    "aurora_gp"
 ;
